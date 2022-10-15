@@ -1,72 +1,73 @@
+import React, { useTransition } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-export default function App() {
-  const[username,setUsername]=useState('')
-  const[email,setEmail]=useState('')
-  const[celular,setCelular]=useState('')
-  const[valid,setValid] = useState(false);
+export default App = () => {
+
+  const [texto,setTexto]= useState('');
+  
+  const border_state = texto!=''? styles.input_green_border : styles.input_red_border
+
+  Submissao = () => {
+
+    if(texto==''){
+
+      console.log("VAZIO")
+    }
 
     const data = {
-      nome : username,
-      email : email,
-      celular : celular
-     } // para JSON?
+      nome : texto,
+    }
 
-     const custom = valid?//colocar em styles e chamar style=styles.example
-      {
-        backgroundColor:'white',
-        borderWidth:2,
-        borderRadius:10,
-        marginTop:10,
-        marginBottom:10,
-        borderColor: 'green',
-      } :
-       {
-        backgroundColor:'white',
-        borderWidth:2,
-        borderRadius:10,
-        marginTop:10,
-        marginBottom:10,
-        borderColor: 'red',
-      }    
+    console.log(data);
+    console.log('Forms Submetido.')
+    return;
+  }
 
-  return (
-    <View style={styles.container}>
-      <Text>Dados Pessoais</Text>
-       
-      <TextInput style={custom}
-      placeholder='Digite seu Nome Completo'
-      onChangeText={setUsername}   
+
+  return(
+    <View>
+      <Text style={styles.titles}>Vamos começar com seus dados Pessoais</Text>
+      <Text>Nome Completo</Text>
+      <TextInput 
+      placeholder='Digite o texto'
+      onChangeText={setTexto}
+      style={border_state}
       />
-      <Text>Email</Text>
-      <TextInput
-      style={styles.input}
-      placeholder='Digite seu Nome Completo'
-      onChangeText={setEmail}      
+      <Text>Nome Completo</Text>
+      <TextInput 
+      placeholder='Digite o texto'
+      onChangeText={setTexto}
+      style={border_state}
       />
-      <Text>Telefone</Text>
-      <TextInput
-      style={styles.input}
-      placeholder='Digite seu Nome Completo'
-      onChangeText={setCelular}      
+      <Text>Nome Completo</Text>
+      <TextInput 
+      placeholder='Digite o texto'
+      onChangeText={setTexto}
+      style={border_state}
       />
-      <TouchableOpacity style={styles.button} onPress={setValid(true)}><Text>OK</Text></TouchableOpacity>
-      <Text>{username+ email +celular}</Text>
-      <StatusBar style="auto" />
+      <TouchableOpacity
+      style={styles.button}
+      onPress={Submissao}
+      ><Text>OK</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  container : {
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center',
+    backgroundColor : 'blue',
+    padding : 18,
   },
-  button: {
+  titles : {
+    fontWeight: 'bold',
+  },
+  button : {
     alignItems: "center",
     backgroundColor: "#DDDDDD",
     borderRadius:20,
@@ -74,4 +75,21 @@ const styles = StyleSheet.create({
     height:30,
     margin:10,
   },
-});
+  input_red_border : {
+    backgroundColor:'white',
+    borderWidth:2,
+    borderRadius:10,
+    marginVertical : 100,
+    marginHorizontal:18,
+    borderColor: 'red',
+  },
+  input_green_border : {
+    backgroundColor:'white',
+    borderWidth:2,
+    marginVertical : 100,
+    marginHorizontal:18,
+    borderRadius:10,
+    borderColor: 'green',
+  },
+})
+
