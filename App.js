@@ -27,21 +27,23 @@ export default App = () => {
 
 
   return(
-    <View>
-      <Text style={styles.titles}>Vamos começar com seus dados Pessoais</Text>
-      <Text>Nome Completo</Text>
+    <View style={styles.container}>
+      <Text style={styles.header}>Vamos começar</Text>
+      <Text style={styles.header}>com seus</Text>
+      <Text style={styles.header2}>Dados Pessoais</Text>
+      <Text style={styles.subtitle}>Nome Completo</Text>
+      <TextInput
+      placeholder='Digite o texto'
+      onChangeText={setTexto}
+      style={border_state}
+      />
+      <Text style={styles.subtitle}>E-mail</Text>
       <TextInput 
       placeholder='Digite o texto'
       onChangeText={setTexto}
       style={border_state}
       />
-      <Text>Nome Completo</Text>
-      <TextInput 
-      placeholder='Digite o texto'
-      onChangeText={setTexto}
-      style={border_state}
-      />
-      <Text>Nome Completo</Text>
+      <Text style={styles.subtitle}>Telefone</Text>
       <TextInput 
       placeholder='Digite o texto'
       onChangeText={setTexto}
@@ -61,35 +63,46 @@ const styles = StyleSheet.create({
     flex:1,
     justifyContent:'center',
     alignItems:'center',
-    backgroundColor : 'blue',
-    padding : 18,
+    backgroundColor: '#A9DEF9',
+    padding: 18,
   },
-  titles : {
+  header : {
+    fontSize: 40,
+  },
+  header2 : {
+    fontSize: 40,
     fontWeight: 'bold',
+    marginBottom: 80,
+  },
+  subtitle : {
+    fontSize: 20,
   },
   button : {
+    justifyContent: 'center',
     alignItems: "center",
-    backgroundColor: "#DDDDDD",
-    borderRadius:20,
-    width: 150,
-    height:30,
-    margin:10,
+    backgroundColor: "white",
+    borderRadius: 15,
+    width: 300,
+    height:45,
+    marginTop: 40
   },
   input_red_border : {
     backgroundColor:'white',
     borderWidth:2,
     borderRadius:10,
-    marginVertical : 100,
-    marginHorizontal:18,
+    marginVertical : 20,
+    width: 300,
+    height: 40,
     borderColor: 'red',
+
   },
   input_green_border : {
     backgroundColor:'white',
     borderWidth:2,
-    marginVertical : 100,
-    marginHorizontal:18,
+    marginVertical : 20,
     borderRadius:10,
+    width: 300,
+    height: 40,
     borderColor: 'green',
   },
 })
-
