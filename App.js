@@ -8,12 +8,15 @@ export default App = () => {
 
   //const [texto,setTexto]= useState('');
   const {control, handleSubmit, formState : {errors}} = useForm({});
-  
+  //useState() para cor da borda ou validação com yup ou os dois
   //const border_state = texto!=''? styles.input_green_border : styles.input_red_border
 
   Submissao = (data) => {
     if(!data.nomeCompleto)
       console.log("digite um nome válido")
+    else if(data.nomeCompleto==='vitor'){
+      console.log("igual a vitor")
+    }
     //console.log({},{},{})
     console.log(data);
     
