@@ -8,16 +8,30 @@ export default App = () => {
 
   //const [texto,setTexto]= useState('');
   const {control, handleSubmit, formState : {errors}} = useForm({});
+  const [bar_color,setBarColor] = useState(styles.input_green_border); //teria que ter 3 ou um form state
   //useState() para cor da borda ou validação com yup ou os dois
   //const border_state = texto!=''? styles.input_green_border : styles.input_red_border
-
+  //quando focado, o input deve colorir de vermelho e quando validado, devem ficar vermelhos apenas os campos inválidos -> add onBlur in formState
   Submissao = (data) => {
-    if(!data.nomeCompleto)
+    if(!data.nomeCompleto){
       console.log("digite um nome válido")
-    else if(data.nomeCompleto==='vitor'){
-      console.log("igual a vitor")
+      setBarColor(styles.input_red_border)
     }
-    //console.log({},{},{})
+    else{setBarColor(styles.input_green_border)}
+
+    if(!data.email){
+      console.log("digite um email válido")
+      setBarColor(styles.input_red_border)
+      
+    }
+    else{setBarColor(styles.input_green_border)}
+
+    if(!data.telefone){
+      console.log("digite um telefone válido")
+      setBarColor(styles.input_red_border)
+    }
+    else{setBarColor(styles.input_green_border)}
+    
     console.log(data);
     
     return;
@@ -39,7 +53,7 @@ export default App = () => {
         <TextInput
         placeholder='Digite o nome completo'
         onChangeText={onChange}
-        style={styles.input_green_border}
+        style={bar_color}
         value={value}
         />
       )}
@@ -53,7 +67,7 @@ export default App = () => {
         <TextInput
         placeholder='Digite o email'
         onChangeText={onChange}
-        style={styles.input_green_border}
+        style={bar_color}
         value={value}
         />
       )}
@@ -67,7 +81,7 @@ export default App = () => {
         <TextInput
         placeholder='Digite o telefone'
         onChangeText={onChange}
-        style={styles.input_green_border}
+        style={bar_color}
         value={value}
         />
       )}
