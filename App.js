@@ -45,7 +45,7 @@ export default App = () => {
         <TextInput
         placeholder='Digite o nome completo'
         onChangeText={onChange}
-        style={bar_color}
+        style={[styles.input_green_border,{borderWidth: errors.nomeCompleto && 1, borderColor:errors.nomeCompleto && 'red'}]}
         value={value}
         />
       )}
@@ -60,13 +60,12 @@ export default App = () => {
         <TextInput
         placeholder='Digite o email'
         onChangeText={onChange}
-        style={bar_color}
+        style={[styles.input_green_border,{borderWidth: errors.email && 1, borderColor:errors.email && 'red'}]}
         value={value}
         />
       )}
       />
       {errors.email && <Text style={styles.subtitle.dois}>{errors.email?.message}</Text>}
-
 
       <Text style={styles.subtitle}>Telefone</Text>
 
@@ -75,7 +74,7 @@ export default App = () => {
         <TextInput
         placeholder='Digite o telefone'
         onChangeText={onChange}
-        style={bar_color}//{[styles.input,{borderWidth: errors.username && 1, borderColor:errors.username && '#ff375b'}]}
+        style={[styles.input_green_border,{borderWidth: errors.telefone && 1, borderColor:errors.telefone && 'red'}]}
         value={value}
         />
       )}
