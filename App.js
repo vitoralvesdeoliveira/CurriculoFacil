@@ -2,54 +2,77 @@ import React, { useTransition } from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import {useForm, Controller} from 'react-hook-form';
 
 export default App = () => {
 
-  const [texto,setTexto]= useState('');
+  //const [texto,setTexto]= useState('');
+  const {control, handleSubmit, formState : {errors}} = useForm({});
   
-  const border_state = texto!=''? styles.input_green_border : styles.input_red_border
+  //const border_state = texto!=''? styles.input_green_border : styles.input_red_border
 
-  Submissao = () => {
-
-    if(texto==''){
-
-      console.log("VAZIO")
-    }
-
-    const data = {
-      nome : texto,
-    }
-
+  Submissao = (data) => {
+    if(!data.nomeCompleto)
+      console.log("digite um nome válido")
+    //console.log({},{},{})
     console.log(data);
-    console.log('Forms Submetido.')
+    
     return;
   }
 
 
   return(
-    <View>
-      <Text style={styles.titles}>Vamos começar com seus dados Pessoais</Text>
-      <Text>Nome Completo</Text>
-      <TextInput 
-      placeholder='Digite o texto'
-      onChangeText={setTexto}
-      style={border_state}
+    <View style={styles.container}>
+      <Text style={styles.header}>Vamos começar</Text>
+      <Text style={styles.header}>com seus</Text>
+      <Text style={styles.header2}>Dados Pessoais</Text>
+
+      
+      
+      <Text style={styles.subtitle}>Nome Completo</Text>
+      
+      <Controller
+      name='nomeCompleto' control={control} render={({field: {onChange,value}}) => ( 
+        <TextInput
+        placeholder='Digite o nome completo'
+        onChangeText={onChange}
+        style={styles.input_green_border}
+        value={value}
+        />
+      )}
       />
-      <Text>Nome Completo</Text>
-      <TextInput 
-      placeholder='Digite o texto'
-      onChangeText={setTexto}
-      style={border_state}
+
+      <Text style={styles.subtitle}>E-mail</Text>
+
+      
+      <Controller
+      name='email' control={control} render={({field : {onChange,value}}) => ( 
+        <TextInput
+        placeholder='Digite o email'
+        onChangeText={onChange}
+        style={styles.input_green_border}
+        value={value}
+        />
+      )}
       />
-      <Text>Nome Completo</Text>
-      <TextInput 
-      placeholder='Digite o texto'
-      onChangeText={setTexto}
-      style={border_state}
+
+
+      <Text style={styles.subtitle}>Telefone</Text>
+
+      <Controller
+      name='telefone' control={control} render={({field : {onChange,value}}) => ( 
+        <TextInput
+        placeholder='Digite o telefone'
+        onChangeText={onChange}
+        style={styles.input_green_border}
+        value={value}
+        />
+      )}
       />
+
       <TouchableOpacity
       style={styles.button}
-      onPress={Submissao}
+      onPress={handleSubmit(Submissao)}
       ><Text>OK</Text>
       </TouchableOpacity>
     </View>
@@ -61,35 +84,46 @@ const styles = StyleSheet.create({
     flex:1,
     justifyContent:'center',
     alignItems:'center',
-    backgroundColor : 'blue',
-    padding : 18,
+    backgroundColor: '#A9DEF9',
+    padding: 18,
   },
-  titles : {
+  header : {
+    fontSize: 40,
+  },
+  header2 : {
+    fontSize: 40,
     fontWeight: 'bold',
+    marginBottom: 80,
+  },
+  subtitle : {
+    fontSize: 20,
   },
   button : {
+    justifyContent: 'center',
     alignItems: "center",
-    backgroundColor: "#DDDDDD",
-    borderRadius:20,
-    width: 150,
-    height:30,
-    margin:10,
+    backgroundColor: "white",
+    borderRadius: 15,
+    width: 300,
+    height:45,
+    marginTop: 40
   },
   input_red_border : {
     backgroundColor:'white',
     borderWidth:2,
     borderRadius:10,
-    marginVertical : 100,
-    marginHorizontal:18,
+    marginVertical : 20,
+    width: 300,
+    height: 40,
     borderColor: 'red',
+
   },
   input_green_border : {
     backgroundColor:'white',
     borderWidth:2,
-    marginVertical : 100,
-    marginHorizontal:18,
+    marginVertical : 20,
     borderRadius:10,
+    width: 300,
+    height: 40,
     borderColor: 'green',
   },
 })
-
