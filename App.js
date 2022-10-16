@@ -3,34 +3,26 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
 
 export default App = () => {
-
+  //em required pode colocar como parametro a str de resposta caso nao digitado nada e no email() como parametro a string de resposta caso digitado algum email invalido 
+  const schema = yup.object({
+    nomeCompleto : yup.string().required('Digite o nome completo'),
+    telefone : yup.number('Digite apenas números!').positive().integer().required('Digite o telefone'),
+    email : yup.string().email('email inválido').required('Digite o Email'),
+  })
   //const [texto,setTexto]= useState('');
-  const {control, handleSubmit, formState : {errors}} = useForm({});
+  const {control, handleSubmit, formState : {errors}} = useForm({
+    //defaultValues : {nomeCompleto : 'example'}
+    resolver:yupResolver(schema)
+  });
   const [bar_color,setBarColor] = useState(styles.input_green_border); //teria que ter 3 ou um form state
   //useState() para cor da borda ou validação com yup ou os dois
   //const border_state = texto!=''? styles.input_green_border : styles.input_red_border
   //quando focado, o input deve colorir de vermelho e quando validado, devem ficar vermelhos apenas os campos inválidos -> add onBlur in formState
   Submissao = (data) => {
-    if(!data.nomeCompleto){
-      console.log("digite um nome válido")
-      setBarColor(styles.input_red_border)
-    }
-    else{setBarColor(styles.input_green_border)}
-
-    if(!data.email){
-      console.log("digite um email válido")
-      setBarColor(styles.input_red_border)
-      
-    }
-    else{setBarColor(styles.input_green_border)}
-
-    if(!data.telefone){
-      console.log("digite um telefone válido")
-      setBarColor(styles.input_red_border)
-    }
-    else{setBarColor(styles.input_green_border)}
     
     console.log(data);
     
@@ -58,6 +50,7 @@ export default App = () => {
         />
       )}
       />
+      {errors.nomeCompleto && <Text style={styles.subtitle.dois}>{errors.nomeCompleto?.message}</Text>}
 
       <Text style={styles.subtitle}>E-mail</Text>
 
@@ -72,6 +65,7 @@ export default App = () => {
         />
       )}
       />
+      {errors.email && <Text style={styles.subtitle.dois}>{errors.email?.message}</Text>}
 
 
       <Text style={styles.subtitle}>Telefone</Text>
@@ -81,11 +75,13 @@ export default App = () => {
         <TextInput
         placeholder='Digite o telefone'
         onChangeText={onChange}
-        style={bar_color}
+        style={bar_color}//{[styles.input,{borderWidth: errors.username && 1, borderColor:errors.username && '#ff375b'}]}
         value={value}
         />
       )}
       />
+      {errors.telefone && <Text style={styles.subtitle.dois}>{errors.telefone?.message}</Text>}
+
 
       <TouchableOpacity
       style={styles.button}
@@ -112,9 +108,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 80,
   },
-  subtitle : {
-    fontSize: 20,
-  },
+  subtitle : {um :{ //subtitle.um e dois foi criado pelo vitor, organizar da melhor forma pra voce, o dois é pra quando der erro (cor vermelha e pa), tem um problema quanto ao tamanho das fontes quando um, dois ou tres erros são mostrados
+      fontSize: 20,       
+  }, dois:{fontSize:20, color:'red'}},
+
   button : {
     justifyContent: 'center',
     alignItems: "center",
