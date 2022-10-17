@@ -5,34 +5,45 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 import {useForm, Controller} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import  Test  from '../CurriculoFacil/Test.js';
+import { printToFileAsync } from 'expo-print';
+import { shareAsync } from 'expo-sharing';
 
-export default Test;
-App = () => {
-  //em required pode colocar como parametro a str de resposta caso nao digitado nada e no email() como parametro a string de resposta caso digitado algum email invalido 
-  const schema = yup.object({
-    nomeCompleto : yup.string().required('Digite o nome completo'),
-    telefone : yup.number('Digite apenas números!').positive().integer().required('Digite o telefone'),
-    email : yup.string().email('email inválido').required('Digite o Email'),
-  })
-  //const [texto,setTexto]= useState('');
-  const {control, handleSubmit, formState : {errors}} = useForm({
-    //defaultValues : {nomeCompleto : 'example'}
-    resolver:yupResolver(schema)
-  });
-  const [bar_color,setBarColor] = useState(styles.input_green_border); //teria que ter 3 ou um form state
-  //useState() para cor da borda ou validação com yup ou os dois
-  //const border_state = texto!=''? styles.input_green_border : styles.input_red_border
-  //quando focado, o input deve colorir de vermelho e quando validado, devem ficar vermelhos apenas os campos inválidos -> add onBlur in formState
-  Submissao = (data) => {
-    
-    console.log(data);
+export default function Test() {
+  //let [name, setName] = useState("");
+
+  const {control, handleSubmit, formState : {errors}} = useForm()
+
+  
+  
+  Submissao = async(data) => {
+      
+      console.log(data);
+      
+      const html = `
+        <html>
+          <body>
+            <h1>Hi ${data.nomeCompleto}</h1>
+            
+            <h1>Hi ${data.email}</h1>
+            
+            <h1>Hi ${data.telefone}</h1>
+            <p style="color: red;">Hello. Bonjour. Hola.</p>
+          </body>
+        </html>
+      `;
+
+    const file = await printToFileAsync({
+        html: html,
+        base64: false
+      });
+  
+      await shareAsync(file.uri);
+
     
     return;
   }
 
-
-  return(
+  return (
     <View style={styles.container}>
       <Text style={styles.header}>Vamos começar</Text>
       <Text style={styles.header}>com seus</Text>
@@ -90,55 +101,25 @@ App = () => {
       ><Text>OK</Text>
       </TouchableOpacity>
     </View>
+    // <View style={styles.container}>
+    //   <TextInput value={name} placeholder="Name" style={styles.textInput} onChangeText={(value) => setName(value)} />
+    //   <Button title="Generate PDF" onPress={generatePdf} />
+    //   <StatusBar style="auto" />
+    // </View>
+
   );
 }
 
 const styles = StyleSheet.create({
-  container : {
-    flex:1,
-    justifyContent:'center',
-    alignItems:'center',
-    backgroundColor: '#A9DEF9',
-    padding: 18,
-  },
-  header : {
-    fontSize: 40,
-  },
-  header2 : {
-    fontSize: 40,
-    fontWeight: 'bold',
-    marginBottom: 80,
-  },
-  subtitle : {um :{ //subtitle.um e dois foi criado pelo vitor, organizar da melhor forma pra voce, o dois é pra quando der erro (cor vermelha e pa), tem um problema quanto ao tamanho das fontes quando um, dois ou tres erros são mostrados
-      fontSize: 20,       
-  }, dois:{fontSize:20, color:'red'}},
-
-  button : {
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: "center",
-    backgroundColor: "white",
-    borderRadius: 15,
-    width: 300,
-    height:45,
-    marginTop: 40
   },
-  input_red_border : {
-    backgroundColor:'white',
-    borderWidth:2,
-    borderRadius:10,
-    marginVertical : 20,
-    width: 300,
-    height: 40,
-    borderColor: 'red',
-
-  },
-  input_green_border : {
-    backgroundColor:'white',
-    borderWidth:2,
-    marginVertical : 20,
-    borderRadius:10,
-    width: 300,
-    height: 40,
-    borderColor: 'green',
-  },
-})
+  textInput: {
+    alignSelf: "stretch",
+    padding: 8,
+    margin: 8
+  }
+});
