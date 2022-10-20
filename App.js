@@ -10,7 +10,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen initialRoutename="TelaA"
+        <Stack.Screen initialRoutename="DadosPessoais" //option:headershow:true/false
         name="DadosPessoais" component={DadosPessoais}/>
         <Stack.Screen 
         name="TelaB" component={TelaB}/>  

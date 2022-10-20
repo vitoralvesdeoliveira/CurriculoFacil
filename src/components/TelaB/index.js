@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Text, View, StyleSheet, Button} from 'react-native';
 
 export default TelaB = ({navigation}) => {
-
+  
   return (
     <View style={styles.container}>
       <Text style={styles.paragraph}>
