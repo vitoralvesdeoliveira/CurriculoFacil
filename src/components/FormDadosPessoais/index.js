@@ -1,18 +1,17 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity,TextInput, Button} from 'react-native';
-import styles from '../../../styles'
+import styles from '../../styles'
 import {useForm, Controller} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+import * as yup from 'yup';
 
-export default function TelaA({navigation}) {
+export default function FormDadosPessoais({navigation}) {
 
-  console.log(navigation)
 
   const schema = yup.object({
     nomeCompleto : yup.string().required('Digite o nome completo'),
-    telefone : yup.number("Digite apenas números!").required('Digite o telefone'),
-    email : yup.string().email('Email inválido').required('Digite o Email'),
+    telefone : yup.string().required('Digite o telefone'),
+    email : yup.string().email('Email inválido').required('Digite o email')
   })
   
   const {control, handleSubmit, formState : {errors}} = useForm({
@@ -26,13 +25,10 @@ export default function TelaA({navigation}) {
     
     console.log(data); //aqui sera o armazenamento
     
-    navigation.navigate('TelaB');
+    navigation.navigate('FormContato',data);
     
     return;
   }
-
-
-
 
 
   return (
@@ -64,7 +60,7 @@ export default function TelaA({navigation}) {
       placeholder='Digite o texto'
       onChangeText={onChange}
       value = {value}
-      style={[styles.input,{borderWidth: errors.telefone && 1, borderColor:errors.telefone && 'red'}]}
+      style={[styles.input,{borderWidth: errors.email && 1, borderColor:errors.email && 'red'}]}
       />
       )}
       />
@@ -75,6 +71,7 @@ export default function TelaA({navigation}) {
       <Controller
       name='telefone' control={control} render={({field : {onChange,value}}) => (
       <TextInput 
+      keyboardType={'numeric'}
       placeholder='Digite o texto'
       onChangeText={onChange}
       value={value}
@@ -83,11 +80,11 @@ export default function TelaA({navigation}) {
   )}
   />
 
-      
-  {errors.telefone && <Text style={styles.subtitle}>{errors.telefone?.message}</Text>}
+  <View>
   {errors.nomeCompleto && <Text style={styles.subtitle}>{errors.nomeCompleto?.message}</Text>}
   {errors.email && <Text style={styles.subtitle}>{errors.email?.message}</Text>}
-
+  {errors.telefone && <Text style={styles.subtitle}>{errors.telefone?.message}</Text>}
+  </View>
     
 
       

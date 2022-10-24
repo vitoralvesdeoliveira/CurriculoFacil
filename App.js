@@ -1,19 +1,25 @@
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
-import DadosPessoais from './src/pages/DadosPessoais'
-import TelaB from './src/components/TelaB'
-
-export default function App() {
+import FormDadosPessoais from './components/FormDadosPessoais/index'
+import ObjetivosProfissionais from './components/ObjetivosProfissionais/index'
+import GerarPdf from './components/GerarPdf/index'
+import FormContato from './components/FormContato/index'
+export default App;
+function App() {
 
   const Stack = createStackNavigator(); 
 
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen initialRoutename="DadosPessoais" //option:headershow:true/false
-        name="DadosPessoais" component={DadosPessoais}/>
         <Stack.Screen 
-        name="TelaB" component={TelaB}/>  
+        name="FormDadosPessoais" component={FormDadosPessoais}/>
+        <Stack.Screen 
+        name="FormContato" component={FormContato}/>
+        <Stack.Screen       
+        name="ObjetivosProfissionais" component={ObjetivosProfissionais}/>  
+        <Stack.Screen       
+        name="GerarPdf" component={GerarPdf}/>  
       </Stack.Navigator>
     </NavigationContainer>
   );
