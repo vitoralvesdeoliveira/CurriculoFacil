@@ -1,108 +1,61 @@
-import React, { useTransition } from 'react'
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import * as React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import { Card, Button, Avatar, IconButton, MD3Colors } from 'react-native-paper';
 
-export default App = () => {
-
-  const [texto,setTexto]= useState('');
-  
-  const border_state = texto!=''? styles.input_green_border : styles.input_red_border
-
-  Submissao = () => {
-
-    if(texto==''){
-
-      console.log("VAZIO")
-    }
-
-    const data = {
-      nome : texto,
-    }
-
-    console.log(data);
-    console.log('Forms Submetido.')
-    return;
-  }
-
-
-  return(
-    <View style={styles.container}>
-      <Text style={styles.header}>Vamos começar</Text>
-      <Text style={styles.header}>com seus</Text>
-      <Text style={styles.header2}>Dados Pessoais</Text>
-      <Text style={styles.subtitle}>Nome Completo</Text>
-      <TextInput
-      placeholder='Digite o texto'
-      onChangeText={setTexto}
-      style={border_state}
-      />
-      <Text style={styles.subtitle}>E-mail</Text>
-      <TextInput 
-      placeholder='Digite o texto'
-      onChangeText={setTexto}
-      style={border_state}
-      />
-      <Text style={styles.subtitle}>Telefone</Text>
-      <TextInput 
-      placeholder='Digite o texto'
-      onChangeText={setTexto}
-      style={border_state}
-      />
-      <TouchableOpacity
-      style={styles.button}
-      onPress={Submissao}
-      ><Text>OK</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
+const CurIcon = props => <Avatar.Icon {...props} icon="book-education" />
+//o card comeca da linha 10 ate 16
+const MyComponent = () => (
+  <View style={styles.container}>
+    <Text style={styles.header2}>Formação</Text>
+    <Card style={styles.card}> 
+    <Card.Title title="Formação 1" left={CurIcon} />
+    <Card.Actions>
+      <Button>Excluir</Button>
+      <Button>Editar</Button>
+    </Card.Actions>
+    </Card>
+    <Card style={styles.card}>
+    <Card.Title title="Formação 2" left={CurIcon} />
+    <Card.Actions>
+      <Button>Excluir</Button>
+      <Button>Editar</Button>
+    </Card.Actions>
+    </Card>
+   <IconButton
+      icon="plus"
+      mode="contained"
+      iconColor={MD3Colors.primary10}
+     size={40}
+     onPress={() => console.log('Pressed')}
+    />
+    <Button style={styles.button}>OK</Button>
+  </View>
+);
 
 const styles = StyleSheet.create({
-  container : {
-    flex:1,
-    justifyContent:'center',
-    alignItems:'center',
+  container: {
+    flex: 1,
+    alignItems: 'center',
     backgroundColor: '#A9DEF9',
-    padding: 18,
+    justifyContent: 'center',
   },
-  header : {
-    fontSize: 40,
-  },
-  header2 : {
+  header2: {
     fontSize: 40,
     fontWeight: 'bold',
-    marginBottom: 80,
+    marginBottom: 20,
   },
-  subtitle : {
-    fontSize: 20,
+  card: {
+    width: 250,
+    marginVertical: 8,
+    borderRadius: 12,
   },
-  button : {
+  button: {
     justifyContent: 'center',
-    alignItems: "center",
     backgroundColor: "white",
     borderRadius: 15,
-    width: 300,
+    width: 250,
     height:45,
-    marginTop: 40
-  },
-  input_red_border : {
-    backgroundColor:'white',
-    borderWidth:2,
-    borderRadius:10,
-    marginVertical : 20,
-    width: 300,
-    height: 40,
-    borderColor: 'red',
+  }
+});
 
-  },
-  input_green_border : {
-    backgroundColor:'white',
-    borderWidth:2,
-    marginVertical : 20,
-    borderRadius:10,
-    width: 300,
-    height: 40,
-    borderColor: 'green',
-  },
-})
+export default MyComponent;
