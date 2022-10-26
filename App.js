@@ -1,36 +1,48 @@
 import * as React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { Card, Button, Avatar, IconButton, MD3Colors } from 'react-native-paper';
+import { Card, Button, Avatar, IconButton, MD3Colors, TextInput, Checkbox } from 'react-native-paper';
+import { DatePickerModal } from 'react-native-paper-dates';
 
-const CurIcon = props => <Avatar.Icon {...props} icon="book-education" />
-//o card comeca da linha 10 ate 16
-const MyComponent = () => (
+const MyComponent = () => {
+  const [curso, setText1] = React.useState("");
+  const [escola, setText2] = React.useState("");
+  const [periodo, setText3] = React.useState("");
+  const [checked, setChecked] = React.useState(false);
+
+  return(
   <View style={styles.container}>
     <Text style={styles.header2}>Formação</Text>
-    <Card style={styles.card}> 
-    <Card.Title title="Formação 1" left={CurIcon} />
-    <Card.Actions>
-      <Button>Excluir</Button>
-      <Button>Editar</Button>
-    </Card.Actions>
-    </Card>
-    <Card style={styles.card}>
-    <Card.Title title="Formação 2" left={CurIcon} />
-    <Card.Actions>
-      <Button>Excluir</Button>
-      <Button>Editar</Button>
-    </Card.Actions>
-    </Card>
-   <IconButton
-      icon="plus"
-      mode="contained"
-      iconColor={MD3Colors.primary10}
-     size={40}
-     onPress={() => console.log('Pressed')}
+      <TextInput style={styles.input}
+        label="Curso"
+        value={curso}
+        mode='outlined'
+        onChangeText={curso => setText1(curso)}
+      />
+       <TextInput style={styles.input}
+        label="Escola"
+        value={escola}
+        mode='outlined'
+        onChangeText={escola => setText2(escola)}
+      />
+        <TextInput style={styles.input}
+        label="Período"
+        value={periodo}
+        mode='outlined'
+        onChangeText={periodo => setText3(periodo)}
+      />
+      <Text>Curso concluído</Text>
+      <Checkbox
+      color="purple"
+      title="girl"
+      status={checked ? 'checked' : 'unchecked'}
+      onPress={() => {
+        setChecked(!checked);
+      }}
     />
     <Button style={styles.button}>OK</Button>
   </View>
-);
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -43,6 +55,10 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: 'bold',
     marginBottom: 20,
+  },
+  input: {
+    backgroundColor: 'white',
+    marginVertical: 10,
   },
   card: {
     width: 250,
