@@ -1,12 +1,12 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { Card, Button, Avatar, IconButton, MD3Colors, TextInput, Checkbox } from 'react-native-paper';
-import { DatePickerModal } from 'react-native-paper-dates';
+import { Card, Avatar, IconButton, MD3Colors, TextInput, Button, Checkbox } from 'react-native-paper';
 
 const MyComponent = () => {
   const [curso, setText1] = React.useState("");
   const [escola, setText2] = React.useState("");
-  const [periodo, setText3] = React.useState("");
+  const [periodo1, setText3] = React.useState("Mês/Ano");
+  const [periodo2, setText4] = React.useState("Mês/Ano");
   const [checked, setChecked] = React.useState(false);
 
   return(
@@ -24,13 +24,20 @@ const MyComponent = () => {
         mode='outlined'
         onChangeText={escola => setText2(escola)}
       />
-        <TextInput style={styles.input}
-        label="Período"
-        value={periodo}
+      <Text style={styles.paragraph}>Período</Text>
+      <TextInput style={styles.input}
+        label="Mês de início"
+        value={periodo1}
         mode='outlined'
-        onChangeText={periodo => setText3(periodo)}
+        onChangeText={periodo1 => setText3(periodo1)}
       />
-      <Text>Curso concluído</Text>
+      <TextInput style={styles.input}
+        label="Mês de conclusão"
+        value={periodo2}
+        mode='outlined'
+        onChangeText={periodo2 => setText4(periodo2)}
+      />
+      <Text style={styles.paragraph}>Curso concluído?</Text>
       <Checkbox
       color="purple"
       title="girl"
@@ -55,6 +62,9 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: 'bold',
     marginBottom: 20,
+  },
+  paragraph: {
+    fontSize: 20,
   },
   input: {
     backgroundColor: 'white',
