@@ -29,6 +29,11 @@ export default StyleSheet.create({
     height:45,
     marginTop: 40
   },
+  card: {
+    width: 250,
+    marginVertical: 8,
+    borderRadius: 12,
+  },
   input : {
     backgroundColor:'white',
     borderWidth:2,
@@ -44,5 +49,12 @@ export default StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  paragraphleftalign: {
+    margin: 0,
+    marginTop: 0,
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'left',
   },
 })
