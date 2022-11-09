@@ -11,6 +11,7 @@ import FormCursosComplementares from './FormCursosComplementares/index';
 import ExpProfissionais from './ExpProfissionais/index';
 import FormExp from './FormExp/index';
 import Adicionais from './Adicionais/index';
+import FormDadosPessoais2 from './FormDadosPessoais2/index'
 
 export default App;
 
@@ -21,6 +22,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="FormDadosPessoais" component={FormDadosPessoais} />
+        <Stack.Screen name="FormDadosPessoais2" component={FormDadosPessoais2} />
         <Stack.Screen name="FormContato" component={FormContato} />
         <Stack.Screen
           name="ObjetivosProfissionais"
@@ -46,7 +48,9 @@ function App() {
 }
 
 //URGENTE
-//reorganizar formularios de acordo com as informacoes mais adequadas
+//rever as variaveis ao gerar pdf
+//formdadospessoais2. Na hora de armazenar, buscar o objeto javascript (ler localstorage) e depois readicionar com os dados de formdadospessoais2 toda vez que mudar de pagina de form2 pra form 1 e vice-versa
+//botao de excluir nos cards
 //useForm em todos os formulários
 //modal ao invés de view quando for add formacoes e cursos
 //mudar as chaves dos armazenamentos das listas, cada um com a sua chave
@@ -60,6 +64,7 @@ function App() {
 //adicionar mensagem placeholder no campo vazio quando nao forem adicionadas informacoes e gerados cards falando para clicar no botao e add formacao por exemplo
 
 //BACKLOG
+//Caso o numero de informacoes seja maior que tanto, diminuir a fonte para 11 por exemplo
 //date picker expo para as datas --acho que está bom do jeito que está
 //limitar numero de caracteres para os inputs
 //home com curriculos salvos, editar e excluir
@@ -68,6 +73,7 @@ function App() {
 //salvar pdf com nome e em algum diretorio especifico
 
 //POUCO URGENTES
+//foto da galeria ou com a camera
 // usar expo-shared-element nos cards
 //arredondar cantos dos inputs e botoes, corrigir cor e texto dos botoes
 //splash-screen com expo
